@@ -24,8 +24,13 @@ class ColorAnalyzer:
     def detect_color_anomaly(histograms):
         variances = []
         for hist in histograms:
+            hist = hist / (np.sum(hist) + 1e-5)
             mean = np.mean(hist)
             var = np.mean((hist - mean) ** 2)
             variances.append(var)
 
         return np.mean(variances)
+
+    @staticmethod
+    def histogram_score(histograms):
+        return ColorAnalyzer.detect_color_anomaly(histograms)

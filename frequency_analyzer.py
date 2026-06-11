@@ -21,3 +21,8 @@ class FrequencyAnalyzer:
         high_mean = np.mean(high)
         
         return low_mean / (high_mean + 1e-5)
+
+    @staticmethod
+    def analyze(image_gray):
+        magnitude = FrequencyAnalyzer.compute_fft(image_gray)
+        return FrequencyAnalyzer.analyze_frequencies(magnitude)
