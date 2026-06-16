@@ -1,14 +1,12 @@
 import cv2
 import json
 import os
-import sys  # Importante para ler os argumentos do terminal
+import sys
 from detector import DeepfakeDetector
 
 def main():
-    # Se você não passar nenhum nome no terminal, ele usa "images/1.jpg" por padrão
     image_path = "images/1.jpg"
     
-    # Se você passar um argumento (ex: python main.py images/2.jpg), ele usa o argumento
     if len(sys.argv) > 1:
         image_path = sys.argv[1]
 

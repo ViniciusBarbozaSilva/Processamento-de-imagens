@@ -20,7 +20,7 @@ class FrequencyAnalyzer:
         low_mean = np.mean(low)
         high_mean = np.mean(high)
         
-        # Invertemos: quanto mais alta frequência em relação à baixa, maior o score de suspeita
+        
         return high_mean / (low_mean + 1e-5)
 
     @staticmethod

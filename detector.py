@@ -20,29 +20,21 @@ class DeepfakeDetector:
         rgb = features["rgb_score"]
         hsv = features["hsv_score"]
 
-        # --- NORMALIZAÇÃO DINÂMICA (MinMax) ---
-        # Frequência
         min_f, max_f = self.config["min_freq"], self.config["max_freq"]
         freq_norm = (freq - min_f) / (max_f - min_f + 1e-5)
         
-        # RGB
         min_rgb, max_rgb = self.config["min_rgb"], self.config["max_rgb"]
         rgb_norm = (rgb - min_rgb) / (max_rgb - min_rgb + 1e-5)
         
-        # HSV
         min_hsv, max_hsv = self.config["min_hsv"], self.config["max_hsv"]
         hsv_norm = (hsv - min_hsv) / (max_hsv - min_hsv + 1e-5)
 
-        # Garante que os scores fiquem rigidamente entre 0 e 1 (regra matemática)
         freq_norm = float(np.clip(freq_norm, 0.0, 1.0))
         rgb_norm = float(np.clip(rgb_norm, 0.0, 1.0))
         hsv_norm = float(np.clip(hsv_norm, 0.0, 1.0))
         
-        # --- CÁLCULO DO SCORE FINAL ---
-        # Pesos equilibrados: 50% Frequência, 25% Histograma RGB, 25% Histograma HSV
         final_score = (freq_norm * 0.60) + (rgb_norm * 0.30) + (hsv_norm * 0.10)
         
-        # Classificação baseada no final_threshold (0.5)
         is_suspicious = final_score > self.config["final_threshold"]
 
         print(f"FREQ Normalizado: {freq_norm:.4f} (Original: {freq:.4f})")
