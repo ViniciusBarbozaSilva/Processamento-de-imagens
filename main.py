@@ -1,13 +1,17 @@
 import cv2
 import json
 import os
+import sys
 from detector import DeepfakeDetector
 
 def main():
-    image_path = "images/modificada.png"
+    image_path = "images/1.jpg"
+    
+    if len(sys.argv) > 1:
+        image_path = sys.argv[1]
 
     if not os.path.exists(image_path):
-        print("Imagem não encontrada!")
+        print(f"Erro: A imagem '{image_path}' não foi encontrada!")
         return
 
     image = cv2.imread(image_path)
@@ -16,6 +20,7 @@ def main():
         print("Erro ao carregar imagem!")
         return
 
+    print(f"Analisando o arquivo: {image_path}...")
     detector = DeepfakeDetector()
     result = detector.analyze(image)
 

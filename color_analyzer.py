@@ -22,14 +22,15 @@ class ColorAnalyzer:
 
     @staticmethod
     def detect_color_anomaly(histograms):
-        variances = []
+        
+        smoothness_scores = []
         for hist in histograms:
+    
             hist = hist / (np.sum(hist) + 1e-5)
-            mean = np.mean(hist)
-            var = np.mean((hist - mean) ** 2)
-            variances.append(var)
-
-        return np.mean(variances)
+            derivative = np.diff(hist)
+            smoothness_scores.append(np.std(derivative))
+            
+        return np.mean(smoothness_scores)
 
     @staticmethod
     def histogram_score(histograms):
