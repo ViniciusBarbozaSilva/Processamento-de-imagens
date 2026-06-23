@@ -2,6 +2,7 @@ import cv2
 import json
 import os
 from detector import DeepfakeDetector
+from image_processor import ImageProcessor
 
 def main():
     image_path = "images/modificada.png"
@@ -10,7 +11,10 @@ def main():
         print("Imagem não encontrada!")
         return
 
-    image = cv2.imread(image_path)
+
+    # image = cv2.imread(image_path)
+    processor = ImageProcessor(image_path)
+    image = processor.normalize_size(width=300, height=300, keep_aspect_ratio=True)
 
     if image is None:
         print("Erro ao carregar imagem!")
