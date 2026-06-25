@@ -20,7 +20,8 @@ class FrequencyAnalyzer:
         low_mean = np.mean(low)
         high_mean = np.mean(high)
         
-        return low_mean / (high_mean + 1e-5)
+        
+        return high_mean / (low_mean + 1e-5)
 
     @staticmethod
     def analyze(image_gray):
