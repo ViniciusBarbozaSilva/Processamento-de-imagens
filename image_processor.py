@@ -3,20 +3,22 @@ import numpy as np
 
 class ImageProcessor:
     @staticmethod
-    def load_image(path):
-        return cv2.imread(path)
+    def prepare_image(image, target_size=(512, 512)):
+        """Padroniza o tamanho da imagem para neutralizar resoluções diferentes."""
+        return cv2.resize(image, target_size, interpolation=cv2.INTER_AREA)
     
     @staticmethod
     def to_grayscale(image):
         return cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
     
     @staticmethod
-    def enhance_contrast(image):
-        return cv2.equalizeHist(image)
+    def remove_sensor_noise(image):
+        """Suaviza o sharpening artificial gerado pelas câmeras dos celulares."""
+        return cv2.GaussianBlur(image, (3, 3), 0)
     
     @staticmethod
-    def gaussian_blur(image):
-        return cv2.GaussianBlur(image, (5, 5), 1.5)
+    def enhance_contrast(image):
+        return cv2.equalizeHist(image)
     
     @staticmethod
     def sharpen(image):

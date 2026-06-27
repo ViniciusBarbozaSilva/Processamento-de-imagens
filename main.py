@@ -5,8 +5,7 @@ import sys
 from detector import DeepfakeDetector
 
 def main():
-    image_path = "images/1.jpg"
-    
+    image_path = "images/pessoas_IA.png"  # Caminho padrão para teste
     if len(sys.argv) > 1:
         image_path = sys.argv[1]
 

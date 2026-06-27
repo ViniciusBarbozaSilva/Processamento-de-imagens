@@ -1,9 +1,5 @@
 {
-  "min_freq": 0.001,
-  "max_freq": 0.10,
-  "min_rgb": 0.0001,
-  "max_rgb": 0.0015,
-  "min_hsv": 0.0001,
-  "max_hsv": 0.012,
-  "final_threshold": 0.55
+  "min_freq": 2.15,
+  "max_freq": 2.65,
+  "final_threshold": 0.52
 }
