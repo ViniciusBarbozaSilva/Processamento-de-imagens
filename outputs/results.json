@@ -1,7 +1,6 @@
 {
-    "frequency_score": 0.08636340847546374,
-    "rgb_score": 0.0008919521351344883,
-    "hsv_score": 0.004527963697910309,
-    "final_score": 0.7229807225823917,
-    "is_suspicious": true
+    "is_suspicious": true,
+    "final_score": 1.0,
+    "frequency_score": 2.8040428869037908,
+    "rgb_score": 0.0038050643634051085
 }

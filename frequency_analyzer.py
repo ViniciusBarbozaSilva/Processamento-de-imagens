@@ -1,27 +1,30 @@
 import numpy as np
+import cv2
 
 class FrequencyAnalyzer:
     
     @staticmethod
     def compute_fft(image_gray):
-        f = np.fft.fft2(image_gray)
+        # Garante tamanho fixo para manter a escala da FFT idêntica
+        resized = cv2.resize(image_gray, (512, 512), interpolation=cv2.INTER_AREA)
+        f = np.fft.fft2(resized)
         fshift = np.fft.fftshift(f)
         magnitude = np.abs(fshift)
-        return magnitude
+        # Aplica log para comprimir a escala dinâmica e facilitar a análise
+        return np.log(magnitude + 1e-5)
     
     @staticmethod
     def analyze_frequencies(magnitude):
         h, w = magnitude.shape
         
-        low = magnitude[h//4:3*h//4, w//4:3*w//4]
-        high = np.copy(magnitude)
-        high[h//4:3*h//4, w//4:3*w//4] = 0
+        # Extrai apenas a coroa mais externa (as altíssimas frequências onde a IA falha)
+        # Ignoramos completamente o centro (baixas frequências/conteúdo da imagem)
+        high_frequencies = np.copy(magnitude)
+        high_frequencies[h//3:2*h//3, w//3:2*w//3] = 0
         
-        low_mean = np.mean(low)
-        high_mean = np.mean(high)
-        
-        # Invertemos: quanto mais alta frequência em relação à baixa, maior o score de suspeita
-        return high_mean / (low_mean + 1e-5)
+        # Calculamos a variação (desvio padrão) desse ruído de alta frequência.
+        # Imagens naturais têm ruído uniforme (desvio baixo). IA tem picos matemáticos (desvio alto).
+        return float(np.std(high_frequencies))
 
     @staticmethod
     def analyze(image_gray):
