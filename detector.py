@@ -23,9 +23,8 @@ class DeepfakeDetector:
         freq_norm = (freq - min_f) / (max_f - min_f + 1e-5)
         freq_norm = float(np.clip(freq_norm, 0.0, 1.0))
         
-        # 2. Ajuste do teto do RGB: subimos o teto de 0.002 para 0.015 
-        # para que o valor das suas fotos reais (ex: 0.006) não estoure em 1.0000
-        rgb_norm = (rgb - 0.0001) / (0.015 - 0.0001 + 1e-5)
+        # 2. Ajuste do teto do RGB: subimos o teto para 0.025
+        rgb_norm = (rgb - 0.0001) / (0.025 - 0.0001 + 1e-5)
         rgb_norm = float(np.clip(rgb_norm, 0.0, 1.0))
 
         # Score Final Combinado (Pega o maior nível de suspeita)

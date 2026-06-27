@@ -4,7 +4,7 @@ import numpy as np
 class ImageProcessor:
     @staticmethod
     def prepare_image(image, target_size=(512, 512)):
-        """Padroniza o tamanho da imagem para neutralizar resoluções diferentes."""
+        # Padroniza o tamanho da imagem para neutralizar resoluções diferentes.
         return cv2.resize(image, target_size, interpolation=cv2.INTER_AREA)
     
     @staticmethod
@@ -13,7 +13,7 @@ class ImageProcessor:
     
     @staticmethod
     def remove_sensor_noise(image):
-        """Suaviza o sharpening artificial gerado pelas câmeras dos celulares."""
+        # Suaviza o sharpening artificial gerado pelas câmeras dos celulares.
         return cv2.GaussianBlur(image, (3, 3), 0)
     
     @staticmethod

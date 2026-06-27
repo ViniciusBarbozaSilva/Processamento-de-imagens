@@ -1,5 +1,5 @@
 {
-  "min_freq": 2.15,
-  "max_freq": 2.65,
-  "final_threshold": 0.52
+  "min_freq": 2.45,
+  "max_freq": 2.75,
+  "final_threshold": 0.50
 }
